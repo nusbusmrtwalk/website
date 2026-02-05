@@ -1,0 +1,247 @@
+---
+import { Image } from "astro:assets";
+import club2 from "../../assets/img/club-2.webp";
+import club5 from "../../assets/img/club-5.webp";
+import type { CollectionEntry } from "astro:content";
+import FormattedDate from "../FormattedDate.astro";
+import EventList from "./EventList.astro";
+
+interface Props {
+  latestEvents: CollectionEntry<"events">[];
+}
+
+const { latestEvents } = Astro.props;
+---
+
+<section>
+  <div class="text">
+    <h2>Who we are</h2>
+    <p class="heading">Unweaving the fabric of Singapore.</p>
+    <p class="desc">
+      We're a passionate group of students at the <a
+        href="https://www.nus.edu.sg/"
+        target="_blank"
+        rel="noopener noreferrer">National University of Singapore (NUS)</a
+      > interested in the island's urban planning, with a specific interest in urban
+      mobility and public transportation. Our club serves as a space for us to share
+      ideas, collaborate, and understand the infrastructure that underpins our daily
+      lives.
+    </p>
+  </div>
+
+  <Image
+    class="caplet right"
+    src={club2}
+    alt="Group photo of club members at a welcome tea event."
+  />
+</section>
+<section>
+  <Image
+    class="caplet left"
+    src={club5}
+    alt="Group photo of club members at an event at SMRT Mandai Depot."
+  />
+  <div class="text">
+    <h2>What we do</h2>
+    <p class="heading">Tracks, trails, and everything in between.</p>
+    <p class="desc">
+      We regularly hold outings and activities as a way to meet new friends, and
+      bond over our common interests. Occasionally, we even get peeks into the
+      hidden infrastructure that keeps Singapore running!
+    </p>
+  </div>
+</section>
+
+<h2 class="standalone">Events</h2>
+<p class="heading">Join us on our next adventure.</p>
+<EventList events={latestEvents} />
+<a class="viewall" href="events"> View all events </a>
+
+<h2 class="standalone">Contact</h2>
+<p class="heading">Hop on board.</p>
+<p class="desc">
+  Join our Telegram group for the latest events & updates. Or if you fancy, join
+  the discussion channel to talk directly with us.
+</p>
+<ul class="socmed-links">
+  <li>
+    <a href="https://t.me/nusbusmrtwalk" target="_blank">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="32"
+        height="32"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="icon icon-tabler icons-tabler-outline icon-tabler-brand-telegram"
+        ><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
+          d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"></path></svg
+      >
+      <div>
+        <span class="socmed-title">Telegram</span>
+        <span class="socmed-handle">@nusbusmrtwalk</span>
+      </div>
+    </a>
+  </li>
+  <li>
+    <a href="https://instagram.com/nusbusmrtwalk" target="_blank">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="32"
+        height="32"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="icon icon-tabler icons-tabler-outline icon-tabler-brand-instagram"
+        ><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
+          d="M4 8a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4l0 -8"
+        ></path><path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path><path
+          d="M16.5 7.5v.01"></path></svg
+      >
+      <div>
+        <span class="socmed-title">Instagram</span>
+        <span class="socmed-handle">@nusbusmrtwalk</span>
+      </div>
+    </a>
+  </li>
+</ul>
+
+<style>
+  h2 {
+    font-size: 1rem;
+    color: var(--color-track-gray-400);
+    text-transform: uppercase;
+    margin: 2rem 0 0rem;
+    letter-spacing: 0.075em;
+    font-weight: 600;
+
+    &.standalone {
+      margin-top: 5rem;
+    }
+  }
+
+  .heading {
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    margin: 0.5rem 0 1rem;
+    color: var(--color-track-gray-900);
+  }
+
+  .desc {
+    font-size: 1rem;
+    color: var(--color-track-gray-500);
+    margin-bottom: 2rem;
+  }
+
+  section {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap-reverse;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    section {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 1.5rem;
+    }
+  }
+
+  .text {
+    min-width: 0;
+    flex-basis: 200px;
+    flex-grow: 1;
+  }
+
+  img.caplet {
+    object-fit: cover;
+    aspect-ratio: 4/3;
+    flex-basis: calc(90vw + 5rem);
+    flex-shrink: 0;
+    width: calc(90vw + 5rem);
+    max-width: unset;
+    -webkit-mask-image: url("/caplet.svg");
+    -webkit-mask-size: cover;
+    mask-image: url("/caplet.svg");
+    mask-size: cover;
+    position: relative;
+    overflow: hidden;
+
+    @media (min-width: 768px) {
+      flex-basis: 360px;
+    }
+  }
+
+  .left {
+    margin-left: -6rem;
+    margin-right: auto;
+    @media (min-width: 768px) {
+      margin-left: -5rem;
+    }
+  }
+  .right {
+    margin-right: 0rem;
+    margin-left: auto;
+    @media (min-width: 768px) {
+      margin-right: -5rem;
+    }
+  }
+
+  .viewall {
+    color: inherit;
+    display: inline-block;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    background: var(--color-track-gray-100);
+    transition: background-color 0.2s ease-in-out;
+    &:hover {
+      background-color: var(--color-track-gray-200);
+    }
+  }
+
+  .socmed-links {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0 4rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .socmed-links li a {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .socmed-links li a:hover .socmed-handle {
+    color: var(--accent);
+  }
+
+  .socmed-title {
+    font-weight: 600;
+    font-size: 1.25rem;
+    display: block;
+  }
+
+  .socmed-handle {
+    font-size: 1rem;
+    color: var(--color-track-gray-500);
+    display: block;
+  }
+</style>

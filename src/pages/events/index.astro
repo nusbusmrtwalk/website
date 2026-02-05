@@ -6,12 +6,15 @@ import Footer from "../../components/Footer.astro";
 import FormattedDate from "../../components/FormattedDate.astro";
 import Header from "../../components/Header.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
+import EventList from "../../components/home/EventList.astro";
 
-const posts = (
-  await getCollection("blog", ({ data }) => {
-    return data.draft !== true;
+const events = (
+  await getCollection("events", ({ data }) => {
+    return true;
   })
-).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+).sort(
+  (a, b) => b.data.eventDateTime.valueOf() - a.data.eventDateTime.valueOf(),
+);
 ---
 
 <!doctype html>
@@ -91,30 +94,7 @@ const posts = (
   <body>
     <Header />
     <main>
-      <section>
-        <ul>
-          {
-            posts.map((post) => (
-              <li>
-                <a href={`/blog/${post.id}/`}>
-                  {post.data.heroImage && (
-                    <Image
-                      width={720}
-                      height={360}
-                      src={post.data.heroImage}
-                      alt=""
-                    />
-                  )}
-                  <h4 class="title">{post.data.title}</h4>
-                  <p class="date">
-                    <FormattedDate date={post.data.pubDate} />
-                  </p>
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </section>
+      <EventList events={events} />
     </main>
     <Footer />
   </body>

@@ -1,17 +1,40 @@
 ---
 interface Props {
-	date: Date;
+  date: Date;
+  includeDate?: boolean;
+  includeTime?: boolean;
 }
 
-const { date } = Astro.props;
+const { date, includeDate = true, includeTime = false } = Astro.props;
+
+const dateSettings = {
+  year: "numeric" as const,
+  month: "short" as const,
+  day: "numeric" as const,
+};
+const timeSettings = {
+  hour: "2-digit" as const,
+  minute: "2-digit" as const,
+  //   24 hours
+  hour12: false,
+};
 ---
 
 <time datetime={date.toISOString()}>
-	{
-		date.toLocaleDateString('en-us', {
-			year: 'numeric',
-			month: 'short',
-			day: 'numeric',
-		})
-	}
+  {
+    includeDate && includeTime
+      ? date.toLocaleString("en-us", {
+          ...dateSettings,
+          ...timeSettings,
+        })
+      : includeDate
+        ? date.toLocaleDateString("en-us", {
+            ...dateSettings,
+          })
+        : includeTime
+          ? date.toLocaleTimeString("en-us", {
+              ...timeSettings,
+            })
+          : ""
+  }
 </time>
