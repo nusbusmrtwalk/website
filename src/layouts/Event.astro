@@ -2,10 +2,10 @@
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import BaseHead from "../components/BaseHead.astro";
+import EventDetails from "../components/EventDetails.astro";
 import Footer from "../components/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 import Header from "../components/Header.astro";
-import EventDetails from "../components/EventDetails.astro";
 
 type Props = CollectionEntry<"events">["data"];
 const {
@@ -33,7 +33,7 @@ const {
 
 <html lang="en">
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead title={title} description={description} image={heroImage} />
     <style>
       main {
         width: 100%;
