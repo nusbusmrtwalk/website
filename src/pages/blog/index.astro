@@ -94,6 +94,13 @@ const posts = (
       <section>
         <ul>
           {
+            posts.length === 0 && (
+              <li>
+                <p class="title">Coming soon!</p>
+              </li>
+            )
+          }
+          {
             posts.map((post) => (
               <li>
                 <a href={`/blog/${post.id}/`}>

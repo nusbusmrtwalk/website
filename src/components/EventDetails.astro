@@ -1,10 +1,6 @@
 ---
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
-import BaseHead from "../components/BaseHead.astro";
-import Footer from "../components/Footer.astro";
-import FormattedDate from "../components/FormattedDate.astro";
-import Header from "../components/Header.astro";
 import {
   AwardIcon,
   BadgeDollarSignIcon,
@@ -15,6 +11,10 @@ import {
   MessageCircleMoreIcon,
   UserRoundIcon,
 } from "@lucide/astro";
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import FormattedDate from "../components/FormattedDate.astro";
+import Header from "../components/Header.astro";
 
 type Props = CollectionEntry<"events">["data"];
 const {
@@ -38,6 +38,16 @@ const {
   eventEligibility,
   eventEligibilityDetails,
 } = Astro.props;
+
+// if eventSignUpDeadline is defined, use that; if not, use end date, if that is also not defined, use event date
+const signUpDeadline = eventSignUpDeadline
+  ? new Date(eventSignUpDeadline)
+  : eventEndDateTime
+    ? new Date(eventEndDateTime)
+    : new Date(eventDateTime);
+
+const eventCanBeRegistered =
+  eventSignupLink && signUpDeadline && signUpDeadline > new Date();
 ---
 
 {
@@ -106,7 +116,7 @@ const {
     </div>
 
     {
-      eventSignupLink ? (
+      eventCanBeRegistered ? (
         <a href={eventSignupLink} class="btn">
           Register Now
         </a>
