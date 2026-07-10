@@ -126,16 +126,16 @@
 	@media (hover: hover) {
 		&:hover:not([data-disabled], :disabled) {
 			/* background-color: oklch(97% 0 0deg); */
-			animation: squiggle 30s linear infinite;
+			animation: squiggle 15s linear infinite;
 		}
 	}
 
 	&:active:not([data-disabled], :disabled) {
-		animation: squiggle 30s linear infinite;
+		animation: squiggle 15s linear infinite;
 	}
 
 	&[data-popup-open]:not([data-disabled], :disabled) {
-		animation: squiggle 30s linear infinite;
+		animation: squiggle 15s linear infinite;
 	}
 
 	&[data-disabled],
