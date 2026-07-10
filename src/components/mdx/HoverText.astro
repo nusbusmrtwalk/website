@@ -1,0 +1,173 @@
+---
+
+---
+
+<span class="hover-text-root" data-hover-text-root>
+  <button class="hover-text" type="button" data-hover-text-trigger>
+    <slot />
+  </button>
+  <span class="hover-text-tooltip" role="tooltip" data-hover-text-tooltip>
+    {Astro.props.text}
+
+    <div class="hover-text-arrow" data-hover-text-arrow></div>
+  </span>
+</span>
+????hi
+<style>
+  .hover-text-root {
+    position: relative;
+    display: inline-block;
+  }
+
+  .hover-text {
+    appearance: none;
+    background: none;
+    border: 0;
+    color: inherit;
+    font: inherit;
+    line-height: inherit;
+    padding: 0;
+    margin: 0;
+    display: inline;
+    cursor: help;
+  }
+
+  .hover-text:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  .hover-text-arrow {
+    position: absolute;
+    background: var(--color-track-gray-200);
+    border: 1px solid var(--color-border-gray-300);
+    width: 8px;
+    height: 8px;
+    transform: rotate(45deg);
+  }
+
+  .hover-text-tooltip {
+    width: max-content;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    color: var(--color-text);
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transition:
+      opacity 0.3s ease,
+      visibility 0.3s ease;
+    z-index: 10;
+    white-space: nowrap;
+
+    display: none;
+  }
+</style>
+
+<script>
+  import {
+    computePosition,
+    flip,
+    shift,
+    offset,
+    arrow,
+  } from "@floating-ui/dom";
+
+  const initHoverText = (root: Element) => {
+    if (
+      !(root instanceof HTMLElement) ||
+      root.dataset.hoverTextInitialized === "true"
+    ) {
+      return;
+    }
+
+    const button = root.querySelector("[data-hover-text-trigger]");
+    const tooltip = root.querySelector("[data-hover-text-tooltip]");
+    const arrowElement = root.querySelector("[data-hover-text-arrow]");
+
+    if (
+      !(button instanceof HTMLElement) ||
+      !(tooltip instanceof HTMLElement) ||
+      !(arrowElement instanceof HTMLElement)
+    ) {
+      return;
+    }
+
+    const trigger = button;
+    const tooltipElement = tooltip;
+    const arrowTip = arrowElement;
+
+    if (!tooltipElement.id) {
+      tooltipElement.id = `hover-text-${globalThis.crypto?.randomUUID?.() ?? Math.random().toString(36).slice(2, 10)}`;
+    }
+
+    trigger.setAttribute("aria-describedby", tooltipElement.id);
+
+    root.dataset.hoverTextInitialized = "true";
+
+    function update() {
+      computePosition(trigger, tooltipElement, {
+        placement: "top",
+        middleware: [
+          offset(6),
+          flip(),
+          shift({ padding: 5 }),
+          arrow({ element: arrowTip }),
+        ],
+      }).then(({ x, y, placement, middlewareData }) => {
+        Object.assign(tooltipElement.style, {
+          left: `${x}px`,
+          top: `${y}px`,
+        });
+
+        const { x: arrowX, y: arrowY } = middlewareData.arrow || {};
+
+        const staticSide =
+          {
+            top: "bottom",
+            right: "left",
+            bottom: "top",
+            left: "right",
+          }[placement.split("-")[0]] || "top";
+
+        Object.assign(arrowTip.style, {
+          left: arrowX != null ? `${arrowX}px` : "",
+          top: arrowY != null ? `${arrowY}px` : "",
+          right: "",
+          bottom: "",
+          [staticSide]: "-4px",
+        });
+      });
+    }
+
+    function showTooltip() {
+      tooltipElement.style.display = "block";
+      update();
+    }
+
+    function hideTooltip() {
+      tooltipElement.style.display = "";
+    }
+
+    ["mouseenter", "focus"].forEach((event) => {
+      trigger.addEventListener(event, showTooltip);
+    });
+
+    ["mouseleave", "blur"].forEach((event) => {
+      trigger.addEventListener(event, hideTooltip);
+    });
+  };
+
+  const initAllHoverTexts = () => {
+    document.querySelectorAll("[data-hover-text-root]").forEach((root) => {
+      initHoverText(root);
+    });
+  };
+
+  initAllHoverTexts();
+  document.addEventListener("astro:page-load", initAllHoverTexts);
+</script>

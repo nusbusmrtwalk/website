@@ -1,0 +1,74 @@
+.Indicator {
+	background: var(--i-bg);
+	color: var(--i-color);
+	box-decoration-break: clone;
+	-webkit-box-decoration-break: clone;
+	padding: 0.125rem 0.5rem;
+
+	/* negate vertical padding w a negative pargin */
+	margin: -0.125rem 0rem;
+	border-radius: 0.25rem;
+	font-weight: 600;
+
+	& svg {
+		width: 1rem;
+		height: 1rem;
+		vertical-align: -0.05em;
+	}
+}
+
+.nowrap {
+	white-space: nowrap;
+	word-break: keep-all;
+}
+
+.g {
+	--color-dull-lavender-50: #f6f4fe;
+	--color-dull-lavender-100: #efeafd;
+	--color-dull-lavender-200: #e1d8fc;
+	--color-dull-lavender-300: #ccb9f9;
+	--color-dull-lavender-400: #ae8bf4;
+	--color-dull-lavender-500: #9964ee;
+	--color-dull-lavender-600: #8b43e4;
+	--color-dull-lavender-700: #7c31d0;
+	--color-dull-lavender-800: #6728af;
+	--color-dull-lavender-900: #56238f;
+	--color-dull-lavender-950: #351461;
+	/* --i-bg: var(--color-dull-lavender-100); */
+	--i-bg: #ae8bf433;
+	--i-color: var(--color-dull-lavender-900);
+}
+
+.l {
+	--color-powder-blue-50: #effafc;
+	--color-powder-blue-100: #d7f1f6;
+	--color-powder-blue-200: #b4e4ee;
+	--color-powder-blue-300: #7fcfe1;
+	--color-powder-blue-400: #43b1cd;
+	--color-powder-blue-500: #2894b2;
+	--color-powder-blue-600: #247896;
+	--color-powder-blue-700: #23627b;
+	--color-powder-blue-800: #255165;
+	--color-powder-blue-900: #234556;
+	--color-powder-blue-950: #122c3a;
+	/* --i-bg: var(--color-powder-blue-100); */
+	--i-bg: #43b1cd33;
+	--i-color: var(--color-powder-blue-900);
+}
+
+.s {
+	--color-albescent-white-50: #fbf7f1;
+	--color-albescent-white-100: #f0e5d1;
+	--color-albescent-white-200: #e9d9bf;
+	--color-albescent-white-300: #dbbe96;
+	--color-albescent-white-400: #cc9e6b;
+	--color-albescent-white-500: #c1864e;
+	--color-albescent-white-600: #b37243;
+	--color-albescent-white-700: #955b39;
+	--color-albescent-white-800: #794a33;
+	--color-albescent-white-900: #623e2c;
+	--color-albescent-white-950: #341f16;
+	/* --i-bg: var(--color-albescent-white-100); */
+	--i-bg: #cc9e6b33;
+	--i-color: var(--color-albescent-white-900);
+}

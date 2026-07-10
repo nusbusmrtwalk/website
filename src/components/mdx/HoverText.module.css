@@ -1,0 +1,162 @@
+.Positioner {
+	width: var(--positioner-width);
+	height: var(--positioner-height);
+	max-width: var(--available-width);
+}
+
+.Popup {
+	box-sizing: border-box;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+	padding: 1.12rem;
+	outline: none;
+	background: var(--color-track-gray-50);
+	border: 2px solid var(--color-bus-blue-600);
+	border-radius: 0.75rem;
+	color: var(--color-track-gray-950);
+	/* box-shadow: 0.25rem 0.25rem 0 rgb(0 0 0 / 8%); */
+	box-shadow: 0.25rem 0.25rem 0 #0a9ab022;
+	transform-origin: var(--transform-origin);
+	transition:
+		transform 100ms ease-out,
+		opacity 100ms ease-out;
+	width: var(--popup-width, auto);
+	height: var(--popup-height, auto);
+	max-width: 500px;
+	font-size: 18px;
+
+	&[data-starting-style],
+	&[data-ending-style] {
+		opacity: 0;
+		transform: scale(0.98);
+	}
+}
+
+.Arrow {
+	display: block;
+	position: relative;
+	width: 24px;
+	height: 12px;
+	overflow: clip;
+
+	&[data-side="top"] {
+		bottom: -12px;
+		rotate: 180deg;
+	}
+
+	&[data-side="bottom"] {
+		top: -12px;
+		rotate: 0deg;
+	}
+
+	&[data-side="left"] {
+		right: -18px;
+		rotate: 90deg;
+	}
+
+	&[data-side="right"] {
+		left: -18px;
+		rotate: -90deg;
+	}
+
+	&::before {
+		content: "";
+		display: block;
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		box-sizing: border-box;
+		width: calc(12px * sqrt(2));
+		height: calc(12px * sqrt(2));
+
+		background: var(--color-track-gray-50);
+		border: 2px solid var(--color-bus-blue-600);
+		transform: translate(-50%, 50%) rotate(45deg);
+	}
+}
+
+.Title {
+	margin: 0;
+	font-size: 0.875rem;
+	line-height: 1.25rem;
+	font-weight: 700;
+}
+
+.Description {
+	margin: 0;
+	line-height: 1.25rem;
+}
+
+.Container {
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.Button {
+	/* make button blend in with article text */
+	display: inline;
+	border: none;
+	padding: 0;
+	background: none;
+	outline: none;
+
+	font-family: inherit;
+	font-size: inherit;
+	font-weight: inherit;
+	color: inherit;
+
+	/* add underline using repeatable squiggle png /mdx/squiggle_blue.svg */
+
+	&.lower {
+		background-position: 0 1.25em;
+	}
+
+	background-image: url("/mdx/squiggle_blue.svg");
+	background-repeat: repeat-x;
+	background-position: 0 1.15em;
+	background-size: 0.7em;
+	padding-bottom: 0.3em;
+	margin-bottom: -0.3em;
+	transition: background-position 0.2s ease-in-out;
+
+	@media (hover: hover) {
+		&:hover:not([data-disabled], :disabled) {
+			/* background-color: oklch(97% 0 0deg); */
+			animation: squiggle 30s linear infinite;
+		}
+	}
+
+	&:active:not([data-disabled], :disabled) {
+		animation: squiggle 30s linear infinite;
+	}
+
+	&[data-popup-open]:not([data-disabled], :disabled) {
+		animation: squiggle 30s linear infinite;
+	}
+
+	&[data-disabled],
+	&:disabled {
+		color: oklch(55.6% 0 0deg);
+		border-color: oklch(55.6% 0 0deg);
+	}
+
+	&:focus-visible {
+		outline: 2px solid oklch(14.5% 0 0deg);
+		outline-offset: -1px;
+	}
+}
+
+/* animatino for squiggly line moving to the right infinitely */
+
+@keyframes squiggle {
+	0% {
+		background-position-x: 0;
+	}
+	100% {
+		background-position-x: 100%;
+	}
+}
