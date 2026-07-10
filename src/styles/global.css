@@ -125,7 +125,7 @@ p {
 }
 
 /* on wider screens, make prose images wider than paragraphs */
-@media (min-width: 1080px) {
+@media (min-width: 1140px) {
 	.prose img.wide {
 		max-width: 900px;
 		position: relative;
