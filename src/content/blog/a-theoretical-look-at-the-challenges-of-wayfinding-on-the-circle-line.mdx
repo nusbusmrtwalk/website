@@ -23,7 +23,7 @@ import stisEndsPer from "../../assets/blog/2026/stis-ends-per.png";
 import stisViaPmn from "../../assets/blog/2026/stis-via-pmn.png";
 import krgLastTrainSign from "../../assets/blog/2026/krg-last-train-sign.jpg";
 
-> This article is co-written between the NUS Bus, MRT & Walk Club and Ryan Ch'ng — an alumnus and heavy user of the Circle Line! All views from both authors are their own's as a regular Circle Line commuter and do not represent NUS or any other organisation.
+> This article is co-written between Ryan Ch'ng, an alumnus and heavy user of the Circle Line, and Kyuu, member of the NUS Bus, MRT & Walk Club! All views from both authors are their own's as a regular Circle Line commuter and do not represent NUS or any other organisation.
 
 This article will attempt to explain why wayfinding on the MRT Circle Line is a unique challenge, and why the existing solutions feel deeply unsatisfying. It will use a theoretical framework to propose a “minimum viable product” solution, achieving the necessary fixes to make the system usable with minimal modifications to existing paradigms and technology, thus keeping the experience familiar to users of other MRT lines in Singapore.
 
@@ -199,7 +199,7 @@ This new signage creates at least two possible points of confusion for the commu
 
 Say a passenger at Paya Lebar follows the station signage that says “via Promenade”, as they are trying to head to Bras Basah. If the passenger sees on the STIS screen a train “via Promenade” is coming, they may simply board the train, since it matches the earlier sign they saw perfectly; without realising anything, the passenger has boarded a loop train, which would go on towards Bayfront and not switch onto the spur.
 
-With the old STIS screen design, the passenger would see the loop label in “Clockwise Loop,” and realise that the train does not head towards the spur. But in the new design, there is zero positive identification on the screen, and passengers are left to remember that the *absence* of text implies a different meaning.
+With the old STIS screen design, the passenger would see the loop label in “Clockwise Loop”, and realise that the train does not head towards the spur. But in the new design, there is zero positive identification on the screen, and passengers are left to remember that the *absence* of text implies a different meaning.
 
 **Example 2: Misidentification of shortest path** 
 
@@ -229,7 +229,7 @@ As we see it, there are three key improvements that can be done, while keeping t
 
 The simplest and most immediate improvement would be to adjust the primary row on the new STIS display for loop trains from “via \[Next Interchange\]” to “Loop via \[Next Interchange\]”. This simple text change should be technically feasible, and it achieves three things at once:
 
-1. It restores the positive identification for loop trains that was lost in the update, giving both service types an identification on equal footing: “Loops via” or “ends at”. With that, the “Next Train” liner on the arrival page could be cleanly added.  
+1. It restores the positive identification for loop trains that was lost in the update, giving both service types an identification on equal footing: “Loop via” or “ends at”. With that, the “Next Train” liner on the arrival page could be cleanly added.  
 2. It distinguishes the service pattern from the <Indicator l /> on the platform description — “Loop via Promenade” is clearly saying something different from “via Promenade” on the physical signage.  
 3. It reconnects with the “Clockwise Loop” and “Anticlockwise Loop” terminology that already exists on physical signage elsewhere — which passengers have already been familiarised with, even if such loops are yet to debut.
 

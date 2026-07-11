@@ -9,7 +9,7 @@ import remarkToc from "remark-toc";
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://example.com",
+	site: "https://nus.busmrtwalk.com",
 	integrations: [mdx(), sitemap(), react()],
 	markdown: {
 		remarkPlugins: [[remarkToc, { heading: "Contents", maxDepth: 3 }]],
