@@ -64,3 +64,10 @@ const ogImage = await getImage({
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(ogImage.src, Astro.url)} />
+
+<!-- Cloudflare Web Analytics -->
+<script
+  type="module"
+  src="https://static.cloudflareinsights.com/beacon.min.js"
+  data-cf-beacon='{"token": "699b6e2eefe54a3aa2a001d5d2819ffd"}'
+></script><!-- End Cloudflare Web Analytics -->
